@@ -2,6 +2,9 @@ package da.homework.my.graphbuilder.data.model;
 
 import android.arch.persistence.room.Ignore;
 
+/**
+ * I love Java)
+ */
 
 public class Graph {
 
