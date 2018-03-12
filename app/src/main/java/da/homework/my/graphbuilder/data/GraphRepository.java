@@ -13,10 +13,19 @@ import da.homework.my.graphbuilder.data.model.Graph;
 
 public class GraphRepository {
     private MutableLiveData<List<Graph>> graphs;
+    private static GraphRepository INSTANCE;
 
-    public GraphRepository(Application application) {
+    private GraphRepository(Application application) {
         graphs = new MutableLiveData<>();
         pleaseWork(application);
+    }
+
+    public static GraphRepository getInstance(Application application) {
+        if (INSTANCE == null) {
+            INSTANCE = new GraphRepository(application);
+        }
+
+        return INSTANCE;
     }
 
     private void pleaseWork(Application app) {

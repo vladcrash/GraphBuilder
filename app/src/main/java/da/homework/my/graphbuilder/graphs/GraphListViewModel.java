@@ -3,7 +3,6 @@ package da.homework.my.graphbuilder.graphs;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class GraphListViewModel extends AndroidViewModel {
 
     public GraphListViewModel(Application application) {
         super(application);
-        repository = new GraphRepository(application);
+        repository = GraphRepository.getInstance(application);
         graphs = repository.getGraphs();
     }
 
