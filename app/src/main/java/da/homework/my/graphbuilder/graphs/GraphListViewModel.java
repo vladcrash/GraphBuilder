@@ -24,4 +24,8 @@ public class GraphListViewModel extends AndroidViewModel {
     public LiveData<List<Graph>> getGraphs() {
         return graphs;
     }
+
+    public void updateGraph(boolean isChecked, int position) {
+        repository.updateGraph(isChecked, position);
+    }
 }

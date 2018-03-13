@@ -14,6 +14,8 @@ import da.homework.my.graphbuilder.graphs.GraphListActivity;
 
 public class GraphActivity extends AppCompatActivity {
 
+    private static final String TAG = GraphActivity.class.getSimpleName();
+
     private ActivityGraphBinding binding;
     private GraphViewModel viewModel;
 
@@ -29,7 +31,7 @@ public class GraphActivity extends AppCompatActivity {
     }
 
     private void subscribeToModel() {
-        viewModel.getGraphs().observe(this, list -> viewModel.setGraph(list.get(0)));
+        viewModel.getGraphs().observe(this, viewModel::setFunctionList);
     }
 
     @Override

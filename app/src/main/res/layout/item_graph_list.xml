@@ -9,6 +9,14 @@
         <variable
             name="graph"
             type="da.homework.my.graphbuilder.data.model.Graph"/>
+
+        <variable
+            name="viewModel"
+            type="da.homework.my.graphbuilder.graphs.GraphListViewModel" />
+
+        <variable
+            name="position"
+            type="Integer" />
     </data>
 
     <android.support.v7.widget.CardView
@@ -32,7 +40,8 @@
                 android:id="@+id/show"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="@{graph.show}"/>
+                android:checked="@{graph.show}"
+                android:onCheckedChanged="@{(cb, isChecked) -> viewModel.updateGraph(isChecked, position)}"/>
 
             <TextView
                 android:id="@+id/function"

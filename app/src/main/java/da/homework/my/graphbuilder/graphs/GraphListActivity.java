@@ -21,6 +21,7 @@ public class GraphListActivity extends AppCompatActivity {
         ActivityGraphListBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_graph_list);
         viewModel = ViewModelProviders.of(this).get(GraphListViewModel.class);
         adapter = new GraphListAdapter();
+        adapter.setViewModel(viewModel);
         binding.setViewModel(viewModel);
         binding.graphsList.setAdapter(adapter);
 
