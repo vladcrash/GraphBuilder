@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Graph Builder</string>
+    <string name="input_function">Input function</string>
 </resources>

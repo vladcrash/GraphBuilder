@@ -2,8 +2,11 @@ package da.homework.my.graphbuilder.graphs;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
@@ -12,6 +15,7 @@ import java.util.List;
 import da.homework.my.graphbuilder.R;
 import da.homework.my.graphbuilder.data.model.Graph;
 import da.homework.my.graphbuilder.databinding.ItemGraphListBinding;
+import da.homework.my.graphbuilder.graph.GraphViewModel;
 
 
 public class GraphListAdapter extends RecyclerView.Adapter<GraphListAdapter.GraphViewHolder> {
@@ -19,7 +23,8 @@ public class GraphListAdapter extends RecyclerView.Adapter<GraphListAdapter.Grap
     private List<Graph> graphs;
     private GraphListViewModel viewModel;
 
-    public GraphListAdapter() {
+    public GraphListAdapter(GraphListViewModel viewModel) {
+        this.viewModel = viewModel;
     }
 
     @Override
@@ -32,7 +37,7 @@ public class GraphListAdapter extends RecyclerView.Adapter<GraphListAdapter.Grap
 
     @Override
     public void onBindViewHolder(GraphViewHolder holder, int position) {
-        holder.bind(graphs.get(position), viewModel, position);
+        holder.bind(graphs.get(position));
     }
 
     @Override
@@ -45,11 +50,7 @@ public class GraphListAdapter extends RecyclerView.Adapter<GraphListAdapter.Grap
         notifyDataSetChanged();
     }
 
-    public void setViewModel(GraphListViewModel viewModel) {
-        this.viewModel = viewModel;
-    }
-
-    public class GraphViewHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener{
+    public class GraphViewHolder extends RecyclerView.ViewHolder {
 
         private ItemGraphListBinding binding;
 
@@ -59,16 +60,14 @@ public class GraphListAdapter extends RecyclerView.Adapter<GraphListAdapter.Grap
 
         }
 
-        private void bind(Graph graph, GraphListViewModel viewModel, int position) {
+        private void bind(Graph graph) {
             binding.setGraph(graph);
-            binding.setViewModel(viewModel);
-            binding.setPosition(position);
+            binding.setListener(listener);
             binding.executePendingBindings();
         }
 
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-        }
+        private OnClickListener listener = view -> {
+            viewModel.updateGraph(view, getAdapterPosition());
+        };
     }
 }

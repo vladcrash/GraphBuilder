@@ -9,6 +9,10 @@
         <variable
             name="viewModel"
             type="da.homework.my.graphbuilder.graphs.GraphListViewModel"/>
+
+        <variable
+            name="addNewGraphCallBack"
+            type="android.view.View.OnClickListener"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -27,7 +31,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:src="@drawable/ic_add_black_24dp"
+            android:onClick="@{(view) -> addNewGraphCallBack.onClick(view)}"
+            android:src="@drawable/ic_add"
             app:fabSize="normal"
             app:layout_anchor="@id/graphs_list"
             app:layout_anchorGravity="bottom|right|end"/>

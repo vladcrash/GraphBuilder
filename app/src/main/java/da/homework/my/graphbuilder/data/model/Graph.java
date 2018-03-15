@@ -14,6 +14,7 @@ public class Graph {
     private boolean isShow;
 
     public Graph() {
+        isShow = true;
     }
 
     @Ignore

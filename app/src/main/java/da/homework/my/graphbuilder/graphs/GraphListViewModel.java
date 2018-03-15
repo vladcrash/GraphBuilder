@@ -3,6 +3,8 @@ package da.homework.my.graphbuilder.graphs;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+import android.view.View;
+import android.widget.CheckBox;
 
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class GraphListViewModel extends AndroidViewModel {
         return graphs;
     }
 
-    public void updateGraph(boolean isChecked, int position) {
-        repository.updateGraph(isChecked, position);
+    public void updateGraph(View view, int position) {
+        repository.updateGraph(((CheckBox) view).isChecked(), position);
     }
 }

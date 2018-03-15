@@ -42,6 +42,11 @@ public class GraphRepository {
         return graphs;
     }
 
+    public void addGraph(Graph graph) {
+        list.add(graph);
+        graphs.setValue(list);
+    }
+
     public void updateGraph(boolean isChecked, int position) {
         list.get(position).setShow(isChecked);
         graphs.setValue(list);
