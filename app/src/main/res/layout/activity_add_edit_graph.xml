@@ -10,30 +10,55 @@
             type="da.homework.my.graphbuilder.addeditgraph.AddEditGraphViewModel"/>
 
         <variable
-            name="listener"
-            type="android.view.View.OnClickListener" />
+            name="saveGraphCallback"
+            type="android.view.View.OnClickListener"/>
+
+        <variable
+            name="colorPickerDialogCallback"
+            type="android.view.View.OnClickListener"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/function_input"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:afterTextChanged="@{(text) -> viewModel.setNameFunction(text.toString())}"
-            android:hint="@string/input_function"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/function_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:afterTextChanged="@{(text) -> viewModel.setNameFunction(text.toString())}"
+                    android:hint="@string/input_function"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:onClick="@{(view) -> colorPickerDialogCallback.onClick(view)}"
+                android:text="@string/select_line_color"/>
+        </LinearLayout>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/done_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            android:onClick="@{(view) -> listener.onClick(view)}"
+            android:onClick="@{(view) -> saveGraphCallback.onClick(view)}"
             android:src="@drawable/ic_done"
-            app:fabSize="normal"
-            android:layout_gravity="bottom|end"/>
+            app:fabSize="normal"/>
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

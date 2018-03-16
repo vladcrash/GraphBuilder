@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Graph Builder</string>
-    <string name="input_function">Input function</string>
+    <string name="input_function">Input your function</string>
+    <string name="select_line_color">Select line color</string>
+    <string name="color_picker_title">Select your color:</string>
 </resources>

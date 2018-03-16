@@ -1,5 +1,6 @@
 package da.homework.my.graphbuilder.addeditgraph;
 
+import android.app.DialogFragment;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -22,12 +23,18 @@ public class AddEditGraphActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_edit_graph);
         viewModel = ViewModelProviders.of(this).get(AddEditGraphViewModel.class);
         binding.setViewModel(viewModel);
-        binding.setListener(listener);
+        binding.setSaveGraphCallback(saveGraphCallback);
+        binding.setColorPickerDialogCallback(colorPickerDialogCallback);
     }
 
-    private OnClickListener listener = view -> {
+    private OnClickListener saveGraphCallback = view -> {
         viewModel.saveGraph();
         finish();
+    };
+
+    private OnClickListener colorPickerDialogCallback = view -> {
+        DialogFragment colorPicker = viewModel.getColorPickerDialog();
+        colorPicker.show(getFragmentManager(), AddEditGraphViewModel.DIALOG_COLOR_PICKER);
     };
 
 }
