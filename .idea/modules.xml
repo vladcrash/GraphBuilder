@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/GraphBuilder.iml" filepath="$PROJECT_DIR$/GraphBuilder.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/colorpicker/colorpicker.iml" filepath="$PROJECT_DIR$/colorpicker/colorpicker.iml" />
+      <module fileurl="file://C:\Users\Valery\AndroidStudioProjects\GraphBuilder\colorpicker\colorpicker.iml" filepath="C:\Users\Valery\AndroidStudioProjects\GraphBuilder\colorpicker\colorpicker.iml" />
     </modules>
   </component>
 </project>

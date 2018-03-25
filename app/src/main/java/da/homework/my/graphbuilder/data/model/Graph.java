@@ -2,16 +2,24 @@ package da.homework.my.graphbuilder.data.model;
 
 import android.arch.persistence.room.Ignore;
 
-/**
- * I love Java)
- */
+import com.github.mikephil.charting.data.Entry;
+
+import org.mariuszgromada.math.mxparser.Argument;
+import org.mariuszgromada.math.mxparser.Expression;
+import org.mariuszgromada.math.mxparser.Function;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Graph {
 
     private String function;
     private int color;
     private int thickness;
+    private double startX = 0.0;
+    private double endX = 3.0;
     private boolean isShow;
+    private Function fun;
 
     public Graph() {
         isShow = true;
@@ -20,6 +28,7 @@ public class Graph {
     @Ignore
     public Graph(String function, int color, int thickness, boolean isShow) {
         this.function = function;
+        fun = new Function(function);
         this.color = color;
         this.thickness = thickness;
         this.isShow = isShow;
@@ -31,6 +40,7 @@ public class Graph {
 
     public void setFunction(String function) {
         this.function = function;
+        fun = new Function(function);
     }
 
     public int getColor() {
@@ -55,5 +65,30 @@ public class Graph {
 
     public void setShow(boolean show) {
         isShow = show;
+    }
+
+    public double getStartX() {
+        return startX;
+    }
+
+    public void setStartX(double startX) {
+        this.startX = startX;
+    }
+
+    public double getEndX() {
+        return endX;
+    }
+
+    public void setEndX(double endX) {
+        this.endX = endX;
+    }
+
+    public List<Entry> getList() {
+        List<Entry> entries = new ArrayList<Entry>();
+        for (double x = startX; x < endX; x++) {
+            entries.add(new Entry((float) x, (float) new Expression("f(x)",
+                    fun, new Argument("x = " + x)).calculate()));
+        }
+        return entries;
     }
 }
