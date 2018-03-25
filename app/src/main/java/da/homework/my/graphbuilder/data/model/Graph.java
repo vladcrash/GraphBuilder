@@ -16,8 +16,8 @@ public class Graph {
     private String function;
     private int color;
     private int thickness;
-    private double startX = 0.0;
-    private double endX = 3.0;
+    private double startX = 1.0;
+    private double endX = 5.0;
     private boolean isShow;
     private Function fun;
 

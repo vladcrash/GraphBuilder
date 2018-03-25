@@ -30,11 +30,11 @@ public class GraphRepository {
     }
 
     private void pleaseWork(Application app) {
-        list.add(new Graph("y = x * x", app.getResources().getColor(R.color.blue), 12, true));
-        list.add(new Graph("y = 1 / x", app.getResources().getColor(R.color.green), 12, true));
-        list.add(new Graph("y = e ^ x", app.getResources().getColor(R.color.amber), 12, true));
-        list.add(new Graph("y = sin(x)", app.getResources().getColor(R.color.deep_orange), 12, false));
-        list.add(new Graph("y = cos(x)", app.getResources().getColor(R.color.lime), 12, true));
+        list.add(new Graph("f(x) = x * x", app.getResources().getColor(R.color.blue), 12, true));
+        list.add(new Graph("f(x) = 1 / x", app.getResources().getColor(R.color.green), 12, true));
+//        list.add(new Graph("f(x) = e ^ x", app.getResources().getColor(R.color.amber), 12, true));
+//        list.add(new Graph("f(x) = sin(x)", app.getResources().getColor(R.color.deep_orange), 12, false));
+//        list.add(new Graph("f(x) = cos(x)", app.getResources().getColor(R.color.lime), 12, true));
         graphs.setValue(list);
     }
 

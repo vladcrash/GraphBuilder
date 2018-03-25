@@ -7,6 +7,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Transformations;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
@@ -26,7 +27,7 @@ public class GraphViewModel extends AndroidViewModel {
 
     private GraphRepository repository;
     private LiveData<List<Graph>> graphs;
-    private ObservableField<String> functionList = new ObservableField<>();
+    private ObservableField<List<Graph>> functionList = new ObservableField<>();
 
     public GraphViewModel(@NonNull Application application) {
         super(application);
@@ -36,17 +37,18 @@ public class GraphViewModel extends AndroidViewModel {
 
     private void init() {
         graphs = repository.getGraphs();
-        // ибо я не знаю где это писать пусть будет тут
-        LineChart chart = (LineChart) findViewById(R.id.chart);
+    }
+
+    public LineData getLineData() {
         List<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
         for (Graph graph : graphs.getValue()) {
+            Log.wtf(TAG, "getLineData: " + graph.getList());
             LineDataSet dataSet = new LineDataSet(graph.getList(), graph.getFunction());
             dataSet.setColor(graph.getColor());
+            dataSet.setLineWidth(graph.getThickness());
             dataSets.add(dataSet);
         }
-        LineData lineData = new LineData(dataSets);
-        chart.setData(lineData);
-        chart.invalidate();
+        return new LineData(dataSets);
     }
 
     public LiveData<List<Graph>> getGraphs() {
@@ -54,12 +56,12 @@ public class GraphViewModel extends AndroidViewModel {
     }
 
 
-    public ObservableField<String> getFunctionList() {
+    public ObservableField<List<Graph>> getFunctionList() {
         return functionList;
     }
 
 
-    public void setFunctionList(String functions) {
+    public void setFunctionList(List<Graph> functions) {
         functionList.set(functions);
     }
 }

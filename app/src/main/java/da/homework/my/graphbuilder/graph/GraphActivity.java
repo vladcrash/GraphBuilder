@@ -28,6 +28,9 @@ public class GraphActivity extends AppCompatActivity {
         binding.setViewModel(viewModel);
 
         subscribeToModel();
+
+        binding.chart.setData(viewModel.getLineData());
+        binding.chart.invalidate();
     }
 
     private void subscribeToModel() {
