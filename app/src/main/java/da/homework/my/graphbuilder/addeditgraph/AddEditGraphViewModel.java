@@ -3,6 +3,7 @@ package da.homework.my.graphbuilder.addeditgraph;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.content.Context;
+import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 
 import com.android.colorpicker.ColorPickerDialog;
@@ -18,7 +19,7 @@ public class AddEditGraphViewModel extends AndroidViewModel {
 
     private GraphRepository repository;
     private Graph graph;
-    private ObservableInt thickness = new ObservableInt(15);
+    private ObservableField<String> thickness = new ObservableField<>("15");
     private Context context;
 
     public AddEditGraphViewModel(Application application) {
@@ -26,6 +27,7 @@ public class AddEditGraphViewModel extends AndroidViewModel {
         context = application.getApplicationContext();
         repository = GraphRepository.getInstance(application);
         graph = new Graph();
+        graph.setThickness(thickness.get());
     }
 
     public void setNameFunction(String name) {
@@ -33,11 +35,11 @@ public class AddEditGraphViewModel extends AndroidViewModel {
     }
 
     public void setThickness(int value) {
-        thickness.set(value + MIN_VALUE);
-        graph.setThickness(value + MIN_VALUE);
+        thickness.set(String.valueOf(value + MIN_VALUE));
+        graph.setThickness(String.valueOf(value + MIN_VALUE));
     }
 
-    public ObservableInt getThickness() {
+    public ObservableField<String> getThickness() {
         return thickness;
     }
 

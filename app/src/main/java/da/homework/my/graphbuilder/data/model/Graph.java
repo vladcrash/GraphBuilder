@@ -15,7 +15,7 @@ public class Graph {
 
     private String function;
     private int color;
-    private int thickness;
+    private String thickness;
     private double startX = 1.0;
     private double endX = 5.0;
     private boolean isShow;
@@ -26,7 +26,7 @@ public class Graph {
     }
 
     @Ignore
-    public Graph(String function, int color, int thickness, boolean isShow) {
+    public Graph(String function, int color, String thickness, boolean isShow) {
         this.function = function;
         fun = new Function(function);
         this.color = color;
@@ -51,11 +51,11 @@ public class Graph {
         this.color = color;
     }
 
-    public int getThickness() {
+    public String getThickness() {
         return thickness;
     }
 
-    public void setThickness(int thickness) {
+    public void setThickness(String thickness) {
         this.thickness = thickness;
     }
 

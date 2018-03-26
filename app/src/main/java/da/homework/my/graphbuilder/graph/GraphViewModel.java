@@ -45,7 +45,7 @@ public class GraphViewModel extends AndroidViewModel {
             Log.wtf(TAG, "getLineData: " + graph.getList());
             LineDataSet dataSet = new LineDataSet(graph.getList(), graph.getFunction());
             dataSet.setColor(graph.getColor());
-            dataSet.setLineWidth(graph.getThickness());
+            dataSet.setLineWidth(Integer.valueOf(graph.getThickness()));
             dataSets.add(dataSet);
         }
         return new LineData(dataSets);
