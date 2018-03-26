@@ -1,0 +1,3 @@
+[submodule "ColorPicker"]
+	path = ColorPicker
+	url = https://github.com/vladcrash/ColorPicker

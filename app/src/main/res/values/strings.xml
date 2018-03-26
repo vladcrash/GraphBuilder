@@ -3,6 +3,8 @@
     <string name="input_function">Input your function</string>
     <string name="select_line_color">Select line color</string>
     <string name="color_picker_title">Select your color:</string>
-    <string name="thickness">Thickness: %s pt</string>
+    <string name="thickness">thickness: %s pt</string>
     <string name="thickness_item">%s pt</string>
+    <string name="function">f(x) =</string>
+    <string name="color">color</string>
 </resources>

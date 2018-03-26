@@ -20,13 +20,16 @@ public class AddEditGraphViewModel extends AndroidViewModel {
     private GraphRepository repository;
     private Graph graph;
     private ObservableField<String> thickness = new ObservableField<>("15");
+    private ObservableInt color = new ObservableInt();
     private Context context;
 
-    public AddEditGraphViewModel(Application application) {
-        super(application);
-        context = application.getApplicationContext();
-        repository = GraphRepository.getInstance(application);
+    public AddEditGraphViewModel(Application app) {
+        super(app);
+        context = app.getApplicationContext();
+        repository = GraphRepository.getInstance(app);
         graph = new Graph();
+        graph.setColor(app.getResources().getColor(R.color.black));
+        color.set(graph.getColor());
         graph.setThickness(thickness.get());
     }
 
@@ -47,6 +50,14 @@ public class AddEditGraphViewModel extends AndroidViewModel {
         repository.addGraph(graph);
     }
 
+    public Graph getGraph() {
+        return graph;
+    }
+
+    public ObservableInt getColor() {
+        return color;
+    }
+
     public ColorPickerDialog getColorPickerDialog() {
         int title = R.string.color_picker_title;
         int[] colors = context.getResources().getIntArray(R.array.dialog_colors);
@@ -54,7 +65,10 @@ public class AddEditGraphViewModel extends AndroidViewModel {
         int size = colors.length;
 
         ColorPickerDialog pickerDialog = ColorPickerDialog.newInstance(title, colors, 0, numColumns, size);
-        pickerDialog.setOnColorSelectedListener(graph::setColor);
+        pickerDialog.setOnColorSelectedListener(c -> {
+            graph.setColor(c);
+            color.set(c);
+        });
         return pickerDialog;
     }
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -22,48 +23,79 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp">
-
-                <EditText
-                    android:id="@+id/function_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:afterTextChanged="@{(text) -> viewModel.setNameFunction(text.toString())}"
-                    android:hint="@string/input_function"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:onClick="@{(view) -> colorPickerDialogCallback.onClick(view)}"
-                android:text="@string/select_line_color"/>
+            android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/function"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="12dp"
-                android:text="@{String.format(@string/thickness, viewModel.thickness.toString())}"
-                android:textColor="@color/colorAccent"/>
+                android:layout_alignBaseline="@+id/function_input"
+                android:layout_alignBottom="@+id/function_input"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="16dp"
+                android:text="@string/function"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                tools:text="@string/function"/>
 
-            <SeekBar
+            <EditText
+                android:id="@+id/function_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@+id/color"
+                android:afterTextChanged="@{(text) -> viewModel.setNameFunction(text.toString())}"
+                android:hint="@string/input_function"/>
+
+            <TextView
+                android:id="@+id/color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/function"
+                android:layout_alignTop="@+id/color_picker"
+                android:text="@string/color"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                tools:text="@string/color"/>
+
+            <TextView
+                android:id="@+id/color_picker"
+                android:layout_width="48dp"
+                android:layout_height="24dp"
+                android:layout_alignStart="@+id/function_input"
+                android:layout_below="@+id/function_input"
+                android:layout_marginTop="8dp"
+                android:background="@{viewModel.color}"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{(view) -> colorPickerDialogCallback.onClick(view)}"/>
+
+            <TextView
+                android:id="@+id/thickness"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/color_picker"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@{String.format(@string/thickness, viewModel.thickness.toString())}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                tools:text="thickness"/>
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/thickness"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:max="10"
-                android:progress="5"
-                android:onProgressChanged="@{(seekbar, value, fromUser) -> viewModel.setThickness(value)}"/>
-        </LinearLayout>
+                android:onProgressChanged="@{(seekbar, value, fromUser) -> viewModel.setThickness(value)}"
+                android:progress="5"/>
+        </RelativeLayout>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/done_button"
