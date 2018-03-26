@@ -15,8 +15,8 @@ public class Graph {
 
     private String function;
     private int color;
-    private String thickness;
-    private double startX = 1.0;
+    private int thickness;
+    private double startX = -1.0;
     private double endX = 5.0;
     private boolean isShow;
     private Function fun;
@@ -26,7 +26,7 @@ public class Graph {
     }
 
     @Ignore
-    public Graph(String function, int color, String thickness, boolean isShow) {
+    public Graph(String function, int color, int thickness, boolean isShow) {
         this.function = function;
         fun = new Function(function);
         this.color = color;
@@ -51,11 +51,11 @@ public class Graph {
         this.color = color;
     }
 
-    public String getThickness() {
+    public int getThickness() {
         return thickness;
     }
 
-    public void setThickness(String thickness) {
+    public void setThickness(int thickness) {
         this.thickness = thickness;
     }
 
@@ -83,12 +83,21 @@ public class Graph {
         this.endX = endX;
     }
 
-    public List<Entry> getList() {
+    public List<List<Entry>> getList() {
+        List<List<Entry>> line = new ArrayList<>();
         List<Entry> entries = new ArrayList<Entry>();
-        for (double x = startX; x < endX; x++) {
-            entries.add(new Entry((float) x, (float) new Expression("f(x)",
-                    fun, new Argument("x = " + x)).calculate()));
+        for (double x = startX; x < endX; x = x + 0.1) {
+            double y = new Expression("f(x)",
+                    fun, new Argument("x = " + x)).calculate();
+            if (Double.isNaN(y)) {
+                if(!entries.isEmpty()) {
+                    line.add(entries);
+                    entries = new ArrayList<>();
+                }
+            } else
+                entries.add(new Entry((float) x, (float) y));
         }
-        return entries;
+        line.add(entries);
+        return line;
     }
 }

@@ -29,8 +29,17 @@ public class GraphActivity extends AppCompatActivity {
 
         subscribeToModel();
 
-        binding.chart.setData(viewModel.getLineData());
+        settingsChart();
         binding.chart.invalidate();
+    }
+
+    private void settingsChart() {
+        binding.chart.setData(viewModel.getLineData());
+        binding.chart.setDescription(null);
+        binding.chart.getAxisLeft().setTextSize(12);
+        binding.chart.getAxisRight().setTextSize(12);
+        binding.chart.getXAxis().setTextSize(12);
+        binding.chart.getLegend().setEnabled(false);
     }
 
     private void subscribeToModel() {

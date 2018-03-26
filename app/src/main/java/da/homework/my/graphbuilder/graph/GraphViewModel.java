@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
@@ -42,11 +43,14 @@ public class GraphViewModel extends AndroidViewModel {
     public LineData getLineData() {
         List<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
         for (Graph graph : graphs.getValue()) {
-            Log.wtf(TAG, "getLineData: " + graph.getList());
-            LineDataSet dataSet = new LineDataSet(graph.getList(), graph.getFunction());
-            dataSet.setColor(graph.getColor());
-            dataSet.setLineWidth(Integer.valueOf(graph.getThickness()));
-            dataSets.add(dataSet);
+            for (List<Entry> entries : graph.getList()) {
+                Log.wtf(TAG, "getLineData: " + entries);
+                LineDataSet dataSet = new LineDataSet(entries, graph.getFunction());
+                dataSet.setDrawCircles(false);
+                dataSet.setColor(graph.getColor());
+                dataSet.setLineWidth(graph.getThickness());
+                dataSets.add(dataSet);
+            }
         }
         return new LineData(dataSets);
     }
