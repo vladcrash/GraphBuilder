@@ -43,7 +43,10 @@ public class GraphActivity extends AppCompatActivity {
     }
 
     private void subscribeToModel() {
-        viewModel.getGraphs().observe(this, viewModel::setFunctionList);
+        viewModel.getGraphs().observe(this, list -> {
+            binding.chart.setData(viewModel.getLineData());
+            binding.chart.invalidate();
+        });
     }
 
     @Override

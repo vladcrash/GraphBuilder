@@ -47,7 +47,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_toEndOf="@+id/color"
                 android:afterTextChanged="@{(text) -> viewModel.setNameFunction(text.toString())}"
-                android:hint="@string/input_function"/>
+                android:hint="@string/input_function"
+                android:text="@{viewModel.function}"/>
 
             <TextView
                 android:id="@+id/color"
@@ -88,13 +89,57 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@id/thickness"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_below="@+id/thickness"
                 android:max="10"
                 android:onProgressChanged="@{(seekbar, value, fromUser) -> viewModel.setThickness(value)}"
-                android:progress="5"/>
+                android:progress="@{viewModel.progress}"/>
+
+            <TextView
+                android:id="@+id/from_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/from_et"
+                android:layout_alignBottom="@+id/from_et"
+                android:layout_alignStart="@+id/function"
+                android:layout_below="@+id/seekBar"
+                android:text="@string/from"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                tools:text="@string/from"/>
+
+            <EditText
+                android:id="@+id/from_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/function_input"
+                android:layout_below="@+id/seekBar"
+                android:afterTextChanged="@{(text) -> viewModel.setFrom(text.toString())}"
+                android:inputType="numberSigned|numberDecimal"
+                android:text="@{viewModel.from}"
+                tools:text="-5"/>
+
+            <TextView
+                android:id="@+id/to_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/to_et"
+                android:layout_alignBottom="@+id/to_et"
+                android:layout_alignStart="@+id/function"
+                android:layout_below="@+id/from_et"
+                android:text="@string/to"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                tools:text="@string/to"/>
+
+            <EditText
+                android:id="@+id/to_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/function_input"
+                android:layout_below="@+id/from_tv"
+                android:afterTextChanged="@{(text) -> viewModel.setTo(text.toString())}"
+                android:inputType="numberSigned|numberDecimal"
+                android:text="@{viewModel.to}"
+                tools:text="5"/>
+
         </RelativeLayout>
 
         <android.support.design.widget.FloatingActionButton

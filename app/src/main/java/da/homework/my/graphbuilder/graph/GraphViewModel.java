@@ -4,12 +4,9 @@ package da.homework.my.graphbuilder.graph;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Transformations;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -18,13 +15,11 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import da.homework.my.graphbuilder.R;
 import da.homework.my.graphbuilder.data.GraphRepository;
 import da.homework.my.graphbuilder.data.model.Graph;
 
 public class GraphViewModel extends AndroidViewModel {
 
-    public static final String TAG = GraphViewModel.class.getSimpleName();
 
     private GraphRepository repository;
     private LiveData<List<Graph>> graphs;
@@ -43,13 +38,14 @@ public class GraphViewModel extends AndroidViewModel {
     public LineData getLineData() {
         List<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
         for (Graph graph : graphs.getValue()) {
-            for (List<Entry> entries : graph.getList()) {
-                Log.wtf(TAG, "getLineData: " + entries);
-                LineDataSet dataSet = new LineDataSet(entries, graph.getFunction());
-                dataSet.setDrawCircles(false);
-                dataSet.setColor(graph.getColor());
-                dataSet.setLineWidth(graph.getThickness());
-                dataSets.add(dataSet);
+            if (graph.isShow()) {
+                for (List<Entry> entries : graph.getList()) {
+                    LineDataSet dataSet = new LineDataSet(entries, graph.getFunction());
+                    dataSet.setDrawCircles(false);
+                    dataSet.setColor(graph.getColor());
+                    dataSet.setLineWidth(Integer.valueOf(graph.getThickness()));
+                    dataSets.add(dataSet);
+                }
             }
         }
         return new LineData(dataSets);
@@ -67,5 +63,6 @@ public class GraphViewModel extends AndroidViewModel {
 
     public void setFunctionList(List<Graph> functions) {
         functionList.set(functions);
+        getLineData();
     }
 }

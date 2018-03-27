@@ -1,27 +1,24 @@
 package da.homework.my.graphbuilder.graphs;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
-import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 
 import java.util.List;
 
 import da.homework.my.graphbuilder.R;
 import da.homework.my.graphbuilder.data.model.Graph;
 import da.homework.my.graphbuilder.databinding.ItemGraphListBinding;
-import da.homework.my.graphbuilder.graph.GraphViewModel;
 
 
 public class GraphListAdapter extends RecyclerView.Adapter<GraphListAdapter.GraphViewHolder> {
 
     private List<Graph> graphs;
     private GraphListViewModel viewModel;
+    private EditGraphCallBack editGraphCallback;
 
     public GraphListAdapter(GraphListViewModel viewModel) {
         this.viewModel = viewModel;
@@ -50,13 +47,22 @@ public class GraphListAdapter extends RecyclerView.Adapter<GraphListAdapter.Grap
         notifyDataSetChanged();
     }
 
-    public class GraphViewHolder extends RecyclerView.ViewHolder {
+    public void setEditGraphCallback(EditGraphCallBack editGraphCallback) {
+        this.editGraphCallback = editGraphCallback;
+    }
+
+    public interface EditGraphCallBack {
+        void editTask(int position);
+    }
+
+    public class GraphViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
 
         private ItemGraphListBinding binding;
 
         public GraphViewHolder(ItemGraphListBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            itemView.setOnClickListener(this);
 
         }
 
@@ -69,5 +75,10 @@ public class GraphListAdapter extends RecyclerView.Adapter<GraphListAdapter.Grap
         private OnClickListener listener = view -> {
             viewModel.updateGraph(view, getAdapterPosition());
         };
+
+        @Override
+        public void onClick(View v) {
+            editGraphCallback.editTask(getAdapterPosition());
+        }
     }
 }

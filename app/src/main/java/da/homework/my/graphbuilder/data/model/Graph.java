@@ -1,6 +1,6 @@
 package da.homework.my.graphbuilder.data.model;
 
-import android.arch.persistence.room.Ignore;
+
 
 import com.github.mikephil.charting.data.Entry;
 
@@ -15,8 +15,8 @@ public class Graph {
 
     private String function;
     private int color;
-    private int thickness;
-    private double startX = -1.0;
+    private String thickness;
+    private double startX = 1.0;
     private double endX = 5.0;
     private boolean isShow;
     private Function fun;
@@ -25,10 +25,10 @@ public class Graph {
         isShow = true;
     }
 
-    @Ignore
-    public Graph(String function, int color, int thickness, boolean isShow) {
+
+    public Graph(String function, int color, String thickness, boolean isShow) {
         this.function = function;
-        fun = new Function(function);
+        fun = new Function("f(x) = " + function);
         this.color = color;
         this.thickness = thickness;
         this.isShow = isShow;
@@ -40,7 +40,7 @@ public class Graph {
 
     public void setFunction(String function) {
         this.function = function;
-        fun = new Function(function);
+        fun = new Function("f(x) = " + function);
     }
 
     public int getColor() {
@@ -51,11 +51,11 @@ public class Graph {
         this.color = color;
     }
 
-    public int getThickness() {
+    public String getThickness() {
         return thickness;
     }
 
-    public void setThickness(int thickness) {
+    public void setThickness(String thickness) {
         this.thickness = thickness;
     }
 

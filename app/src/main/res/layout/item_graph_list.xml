@@ -50,7 +50,7 @@
                 android:layout_toEndOf="@id/show"
                 android:layout_toStartOf="@id/thickness"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:text="@{graph.function}"
+                android:text="@{String.format(@string/function_item_list, graph.function)}"
                 android:textSize="24sp"
                 tools:text="some text"/>
 

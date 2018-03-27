@@ -6,5 +6,9 @@
     <string name="thickness">thickness: %s pt</string>
     <string name="thickness_item">%s pt</string>
     <string name="function">f(x) =</string>
+    <string name="function_item_list">f(x) = %s</string>
     <string name="color">color</string>
+    <string name="from">from</string>
+    <string name="to">to</string>
+    <string name="edit">edit</string>
 </resources>
